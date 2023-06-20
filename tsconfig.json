@@ -1,7 +1,15 @@
 {
+  "ts-node": {
+    // these options are overrides used only by ts-node
+    // same as the --compilerOptions flag and the TS_NODE_COMPILER_OPTIONS environment variable
+    "compilerOptions": {
+      "module": "commonjs"
+    }
+  },
   "compilerOptions": {
+    "baseUrl": "./",
     "jsx": "react-jsx",
-    "module": "commonjs",
+    "module": "esnext",
     "target": "es6" /* Set the JavaScript language version for emitted JavaScript and include compatible library declarations. */,
     "lib": ["dom", "dom.iterable", "esnext"],
     "sourceMap": true /* Create source map files for emitted JavaScript files. */,

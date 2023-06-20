@@ -5,11 +5,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import { Container, Row, Col } from 'react-bootstrap'
 import cx from 'classnames'
 
-type AppProps = {
-  baseUrl: string
-}
-
-const App: FC<AppProps> = (_props: AppProps) => {
+const App: FC = () => {         
   return (
     <Container className={cx('justify-content-center')}>
       <Row className={cx('justify-content-center')}>

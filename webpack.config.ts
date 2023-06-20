@@ -5,25 +5,37 @@ import MiniCssExtractPlugin from 'mini-css-extract-plugin'
 import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import EsLintPlugin from 'eslint-webpack-plugin'
 import dotenv from 'dotenv'
+import { container } from 'webpack'
+import Config from './src/configuration/config'
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const deps = require('./package.json').dependencies;
 
 dotenv.config();
 
 module.exports = {
-  mode: process.env.NODE_ENV || 'development',
-  entry: path.resolve(__dirname, 'src/index.tsx'),
+  mode: Config.env(),
+  entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
-    filename: '[name].[contenthash].js',
-    path: path.join(__dirname, 'build'),
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].[contenthash].bundle.js',
+    uniqueName: 'login',
+    clean: true,
+    asyncChunks: true
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
   },
   devServer: {
-    static: {
-      directory: path.join(__dirname, 'build'),
+    https: true,
+    hot: true,
+    client: {
+      progress: true,
     },
-    port: 3011,
-    open: true,
+    static: {
+      directory: path.join(__dirname, 'dist'),
+    },
+    port: process.env.PORT,
+    //open: true,
     historyApiFallback: true,
   },
   module: {
@@ -45,7 +57,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-       'process.env': JSON.stringify(process.env)
+      'process.env': JSON.stringify(process.env)
     }),
     new EsLintPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -54,12 +66,35 @@ module.exports = {
       favicon: './public/logo.png',
       filename: 'index.html',
     }),
-    new BundleAnalyzerPlugin(),
+    new BundleAnalyzerPlugin({
+      analyzerPort: Config.analyzerPort(),
+      openAnalyzer: false
+    }),
     new MiniCssExtractPlugin({}),
+    new container.ModuleFederationPlugin({
+      name: 'login',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './LoginRemote': './src/App.tsx'
+      },
+      shared: {
+        ...deps,
+        react: { singleton: true, requiredVersion: deps.react },
+        'react-dom': {
+          singleton: true,
+          requiredVersion: deps['react-dom'],
+        },
+        'react-router-dom': {
+          singleton: true,
+          requiredVersion: deps['react-router-dom'],
+        }
+      },
+    })
   ],
   optimization: {
-    splitChunks: {
-      chunks: 'all',
-    },
+    removeEmptyChunks: true,
   },
+  experiments: {
+    topLevelAwait: true,
+  }
 }
