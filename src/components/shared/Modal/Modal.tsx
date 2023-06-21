@@ -1,7 +1,7 @@
+import { CloseButton, Modal } from 'react-bootstrap'
 import { FC } from 'react'
-import { Modal, CloseButton } from 'react-bootstrap'
-import style from './Modal.module.scss'
 import cx from 'classnames'
+import style from './Modal.module.scss'
 
 type ModalPopProps = {
   show: boolean

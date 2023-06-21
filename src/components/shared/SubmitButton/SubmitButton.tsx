@@ -1,5 +1,5 @@
+import { Button, Spinner } from 'react-bootstrap'
 import { FC } from 'react'
-import { Spinner, Button } from 'react-bootstrap'
 
 type SubmitButtonProps = {
   submitting: boolean

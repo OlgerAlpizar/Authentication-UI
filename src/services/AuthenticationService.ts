@@ -16,7 +16,9 @@ export const onRegisterSocialLink = async (
   throw `Social register not implemented yet ${link}`
 }
 
-export const onBasicLogin = async (request: SignInRequest): Promise<unknown> => {
+export const onBasicLogin = async (
+  request: SignInRequest
+): Promise<unknown> => {
   return authApi.post('/sign-in', request).then((res) => res.data)
 }
 

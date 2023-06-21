@@ -1,14 +1,14 @@
-import { FC } from 'react'
 import { BsFacebook, BsGoogle } from 'react-icons/bs'
-import SocialEvent from '../../models/SocialEvent'
-import SocialLink from '../../models/SocialLink'
-import ButtonIcon from '../shared/IconButton/IconButton'
+import { Col } from 'react-bootstrap'
+import { FC } from 'react'
 import {
   onLoginSocialLink,
   onRegisterSocialLink,
 } from '../../services/AuthenticationService'
 import { toast } from 'react-toastify'
-import { Col } from 'react-bootstrap'
+import ButtonIcon from '../shared/IconButton/IconButton'
+import SocialEvent from '../../models/SocialEvent'
+import SocialLink from '../../models/SocialLink'
 
 type SocialLinksProps = {
   socialEvent: SocialEvent
@@ -19,12 +19,12 @@ const SocialLinks: FC<SocialLinksProps> = (props: SocialLinksProps) => {
     switch (props.socialEvent) {
       case SocialEvent.SignIn:
         onLoginSocialLink(link)
-          .then((res) => console.log('success', res))
+          .then((res) => toast.success(`Not implemented ${res}`))
           .catch((err) => toast.error(err))
         break
       case SocialEvent.Register:
         onRegisterSocialLink(link)
-          .then((res) => console.log('success', res))
+          .then((res) => toast.success(`Not implemented ${res}`))
           .catch((err) => toast.error(err))
         break
     }
@@ -36,7 +36,7 @@ const SocialLinks: FC<SocialLinksProps> = (props: SocialLinksProps) => {
         <ButtonIcon
           type="button"
           label=""
-          onClick={(_) => onSocialLinkClick(SocialLink.FACEBOOK)}
+          onClick={() => onSocialLinkClick(SocialLink.FACEBOOK)}
         >
           <BsFacebook
             className={'primaryIconBtn'}
@@ -50,7 +50,7 @@ const SocialLinks: FC<SocialLinksProps> = (props: SocialLinksProps) => {
         <ButtonIcon
           type="button"
           label=""
-          onClick={(_) => onSocialLinkClick(SocialLink.GOOGLE)}
+          onClick={() => onSocialLinkClick(SocialLink.GOOGLE)}
         >
           <BsGoogle
             className={'primaryIconBtn'}

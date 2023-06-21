@@ -1,7 +1,7 @@
 export const emailValidator = (email: string) =>
   /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/.test(email) &&
   maxCharacters(email, 20)
-  
+
 export const noEmptyValidator = (text: string, length: number) =>
   maxCharacters(text, length)
 

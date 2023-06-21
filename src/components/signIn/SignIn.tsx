@@ -1,17 +1,17 @@
-import { SyntheticEvent, FC, useState, useReducer } from 'react'
-import { Form, Row, Col, Card } from 'react-bootstrap'
-import cx from 'classnames'
-import { Link, useNavigate } from 'react-router-dom'
+import { Card, Col, Form, Row } from 'react-bootstrap'
+import { FC, SyntheticEvent, useReducer, useState } from 'react'
 import { InputInfo, InputInfoSet } from '../../models/InputInfo'
-import SocialEvent from '../../models/SocialEvent'
-import { emailValidator, noEmptyValidator } from '../../utils/RegexValidator'
-import { textInputReducer } from '../../utils/InputReducer'
-import FormSocialManager from '../socialLinks/SocialLinks'
-import SubmitButton from '../shared/SubmitButton/SubmitButton'
-import { onBasicLogin } from '../../services/AuthenticationService'
-import SignInRequest from '../../models/requests/SignInRequest'
-import { toast } from 'react-toastify'
+import { Link, useNavigate } from 'react-router-dom'
 import { buildApiCatchMessage } from '../../utils/buildApiCatchMessage'
+import { emailValidator, noEmptyValidator } from '../../utils/RegexValidator'
+import { onBasicLogin } from '../../services/AuthenticationService'
+import { textInputReducer } from '../../utils/InputReducer'
+import { toast } from 'react-toastify'
+import FormSocialManager from '../socialLinks/SocialLinks'
+import SignInRequest from '../../models/requests/SignInRequest'
+import SocialEvent from '../../models/SocialEvent'
+import SubmitButton from '../shared/SubmitButton/SubmitButton'
+import cx from 'classnames'
 
 const SignIn: FC = () => {
   const navigate = useNavigate()
@@ -45,20 +45,16 @@ const SignIn: FC = () => {
   const onSubmit = (event: SyntheticEvent) => {
     event.preventDefault()
     setSubmitting(true)
-    
-    const request = new SignInRequest(
-      email.value,
-      password.value,
-      rememberMe
-    )
-    
+
+    const request = new SignInRequest(email.value, password.value, rememberMe)
+
     onBasicLogin(request)
-    .then(() => {
-      toast.success('Sign in completed')
-      navigate('../home')
-    })
-    .catch((err: Error) => toast.error(buildApiCatchMessage(err)))
-    .finally(() => setSubmitting(false))
+      .then(() => {
+        toast.success('Sign in completed')
+        navigate('../home')
+      })
+      .catch((err: Error) => toast.error(buildApiCatchMessage(err)))
+      .finally(() => setSubmitting(false))
   }
 
   return (

@@ -4,6 +4,7 @@ import cx from 'classnames'
 type IconButtonProps = {
   type: 'button' | 'submit' | 'reset'
   label: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   onClick?: (event: any) => void
   children?: React.ReactNode
 }

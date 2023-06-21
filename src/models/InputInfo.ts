@@ -3,7 +3,7 @@ export class InputInfo {
   value: string
   error: string
 
-  constructor(valid: boolean = true, value: string = '', error: string = '') {
+  constructor(valid = true, value = '', error = '') {
     this.valid = valid
     this.value = value
     this.error = error

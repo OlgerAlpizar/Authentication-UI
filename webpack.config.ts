@@ -1,15 +1,15 @@
-import path from 'path'
-import webpack from 'webpack'
+import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
+import { container } from 'webpack'
+import { dependencies } from './package.json'
+import Config from './src/configurations/config'
+import EsLintPlugin from 'eslint-webpack-plugin'
 import HtmlWebPackPlugin from 'html-webpack-plugin'
 import MiniCssExtractPlugin from 'mini-css-extract-plugin'
-import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
-import EsLintPlugin from 'eslint-webpack-plugin'
 import dotenv from 'dotenv'
-import { container } from 'webpack'
-import Config from './src/configurations/config'
-import { dependencies } from './package.json'
+import path from 'path'
+import webpack from 'webpack'
 
-dotenv.config();
+dotenv.config()
 
 module.exports = {
   mode: Config.env(),
@@ -19,7 +19,7 @@ module.exports = {
     filename: '[name].[contenthash].bundle.js',
     uniqueName: 'authentication',
     clean: true,
-    asyncChunks: true
+    asyncChunks: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.json'],
@@ -56,7 +56,7 @@ module.exports = {
   },
   plugins: [
     new webpack.DefinePlugin({
-      'process.env': JSON.stringify(process.env)
+      'process.env': JSON.stringify(process.env),
     }),
     new EsLintPlugin(),
     new webpack.HotModuleReplacementPlugin(),
@@ -67,14 +67,14 @@ module.exports = {
     }),
     new BundleAnalyzerPlugin({
       analyzerPort: Config.analyzerPort(),
-      openAnalyzer: false
+      openAnalyzer: false,
     }),
     new MiniCssExtractPlugin({}),
     new container.ModuleFederationPlugin({
       name: 'authentication',
       filename: 'remoteEntry.js',
       exposes: {
-        './AuthenticationRemote': './src/exposes/AuthenticationRemote.tsx'
+        './AuthenticationRemote': './src/exposes/AuthenticationRemote.tsx',
       },
       shared: {
         ...dependencies,
@@ -86,14 +86,14 @@ module.exports = {
         'react-router-dom': {
           singleton: true,
           requiredVersion: dependencies['react-router-dom'],
-        }
+        },
       },
-    })
+    }),
   ],
   optimization: {
     removeEmptyChunks: true,
   },
   experiments: {
     topLevelAwait: true,
-  }
+  },
 }

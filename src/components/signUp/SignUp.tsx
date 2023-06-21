@@ -1,37 +1,37 @@
-import { SyntheticEvent, FC, useState, useReducer } from 'react'
+import { BsInfoCircle } from 'react-icons/bs'
 import {
-  Form,
-  Row,
-  Col,
   Button,
   Card,
+  Col,
+  Form,
   OverlayTrigger,
   Popover,
   PopoverBody,
+  Row,
 } from 'react-bootstrap'
-import SocialEvent from '../../models/SocialEvent'
+import { FC, SyntheticEvent, useReducer, useState } from 'react'
 import { InputInfo, InputInfoSet } from '../../models/InputInfo'
-import FormSocialManager from '../socialLinks/SocialLinks'
-import { textInputReducer } from '../../utils/InputReducer'
+import { Link } from 'react-router-dom'
+import { buildApiCatchMessage } from '../../utils/buildApiCatchMessage'
 import {
   conformPasswordValidator,
   emailValidator,
   noEmptyOrSpecialValidator,
   passwordValidator,
 } from '../../utils/RegexValidator'
-import { Link } from 'react-router-dom'
-import { BsInfoCircle } from 'react-icons/bs'
-import TermsConditions from '../termsConditions/TermsConditions'
-import CreateAccountRequest from '../../models/requests/CreateAccountRequest'
-import SubmitButton from '../shared/SubmitButton/SubmitButton'
 import { onBasicRegister } from '../../services/AuthenticationService'
+import { textInputReducer } from '../../utils/InputReducer'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
-import { buildApiCatchMessage } from '../../utils/buildApiCatchMessage'
+import CreateAccountRequest from '../../models/requests/CreateAccountRequest'
+import FormSocialManager from '../socialLinks/SocialLinks'
+import SocialEvent from '../../models/SocialEvent'
+import SubmitButton from '../shared/SubmitButton/SubmitButton'
+import TermsConditions from '../termsConditions/TermsConditions'
 
 const SignUp: FC = () => {
   const navigate = useNavigate()
-  
+
   const emailReducer = (currentState: InputInfo, action: InputInfoSet) => {
     return textInputReducer(
       currentState,

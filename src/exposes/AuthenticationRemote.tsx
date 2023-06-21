@@ -2,9 +2,7 @@ import { FC } from 'react'
 import App from '../App'
 
 const AuthenticationRemote: FC = () => {
-  return (
-    <App/>
-  )
+  return <App />
 }
 
 export default AuthenticationRemote
