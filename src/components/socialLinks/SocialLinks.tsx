@@ -6,7 +6,7 @@ import ButtonIcon from '../shared/IconButton/IconButton'
 import {
   onLoginSocialLink,
   onRegisterSocialLink,
-} from '../../services/UserManagementService'
+} from '../../services/AuthenticationService'
 import { toast } from 'react-toastify'
 import { Col } from 'react-bootstrap'
 

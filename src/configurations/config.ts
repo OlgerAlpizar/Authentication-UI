@@ -1,5 +1,5 @@
 class Config {
-  static loginApi = (): string => { return process.env.LOGIN_BACKEND || 'http:localhost' }
+  static authenticationApi = (): string => { return process.env.AUTHENTICATION_BACKEND || '' }
 
   static port = (): number => { return parseInt(process.env.PORT || '') }
 

@@ -1,10 +1,10 @@
-import Config from '../configuration/config'
+import Config from '../configurations/config'
 import CreateAccount from '../models/requests/CreateAccountRequest'
 import SignInRequest from '../models/requests/SignInRequest'
 import SocialLink from '../models/SocialLink'
 import axios from 'axios'
 
-export const authApi = axios.create({ baseURL: Config.loginApi() })
+export const authApi = axios.create({ baseURL: Config.authenticationApi() })
 
 export const onLoginSocialLink = async (link: SocialLink): Promise<unknown> => {
   throw `Social login not implemented yet ${link}`

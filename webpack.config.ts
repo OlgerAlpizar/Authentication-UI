@@ -6,9 +6,8 @@ import { BundleAnalyzerPlugin } from 'webpack-bundle-analyzer'
 import EsLintPlugin from 'eslint-webpack-plugin'
 import dotenv from 'dotenv'
 import { container } from 'webpack'
-import Config from './src/configuration/config'
-// eslint-disable-next-line @typescript-eslint/no-var-requires
-const deps = require('./package.json').dependencies;
+import Config from './src/configurations/config'
+import { dependencies } from './package.json'
 
 dotenv.config();
 
@@ -18,7 +17,7 @@ module.exports = {
   output: {
     path: path.join(__dirname, 'dist'),
     filename: '[name].[contenthash].bundle.js',
-    uniqueName: 'login',
+    uniqueName: 'authentication',
     clean: true,
     asyncChunks: true
   },
@@ -34,7 +33,7 @@ module.exports = {
     static: {
       directory: path.join(__dirname, 'dist'),
     },
-    port: process.env.PORT,
+    port: Config.port(),
     //open: true,
     historyApiFallback: true,
   },
@@ -72,21 +71,21 @@ module.exports = {
     }),
     new MiniCssExtractPlugin({}),
     new container.ModuleFederationPlugin({
-      name: 'login',
+      name: 'authentication',
       filename: 'remoteEntry.js',
       exposes: {
-        './LoginRemote': './src/App.tsx'
+        './AuthenticationRemote': './src/exposes/AuthenticationRemote.tsx'
       },
       shared: {
-        ...deps,
-        react: { singleton: true, requiredVersion: deps.react },
+        ...dependencies,
+        react: { singleton: true, requiredVersion: dependencies.react },
         'react-dom': {
           singleton: true,
-          requiredVersion: deps['react-dom'],
+          requiredVersion: dependencies['react-dom'],
         },
         'react-router-dom': {
           singleton: true,
-          requiredVersion: deps['react-router-dom'],
+          requiredVersion: dependencies['react-router-dom'],
         }
       },
     })

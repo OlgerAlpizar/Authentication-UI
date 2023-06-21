@@ -24,7 +24,7 @@ import { BsInfoCircle } from 'react-icons/bs'
 import TermsConditions from '../termsConditions/TermsConditions'
 import CreateAccountRequest from '../../models/requests/CreateAccountRequest'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
-import { onBasicRegister } from '../../services/UserManagementService'
+import { onBasicRegister } from '../../services/AuthenticationService'
 import { toast } from 'react-toastify'
 import { useNavigate } from 'react-router-dom'
 import { buildApiCatchMessage } from '../../utils/buildApiCatchMessage'
@@ -167,7 +167,7 @@ const SignUp: FC = () => {
           className="float-end m-0 p-0"
         >
           <Link
-            to={'../sign-in'}
+            to={'..'}
             className={'primaryIconBtn'}
           >
             &nbsp;Already a member!

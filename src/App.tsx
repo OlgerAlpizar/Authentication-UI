@@ -1,16 +1,39 @@
 import { FC } from 'react'
-import { RouterProvider, createBrowserRouter } from 'react-router-dom'
-import { routeDefinitions } from './routing/Routes'
+import { Route, Routes } from 'react-router-dom'
 import { toast, ToastContainer } from 'react-toastify'
 import { Container, Row, Col } from 'react-bootstrap'
-import cx from 'classnames'
-
-const App: FC = () => {         
+import ForgotPassword from './components/forgotPassword/ForgotPassword'
+import Home from './components/home/Home'
+import NewAccount from './components/newAccount/NewAccount'
+import SignIn from './components/signIn/SignIn'
+import SignUp from './components/signUp/SignUp'
+const App: FC = () => {
   return (
-    <Container className={cx('justify-content-center')}>
-      <Row className={cx('justify-content-center')}>
+    <Container>
+      <Row>
         <Col>
-          <RouterProvider router={createBrowserRouter(routeDefinitions)} />
+          <Routes>
+            <Route
+              index
+              element={<SignIn />}
+            />
+            <Route
+              path="sign-up"
+              element={<SignUp />}
+            />
+            <Route
+              path="forgot-password"
+              element={<ForgotPassword />}
+            />
+            <Route
+              path="home"
+              element={<Home />}
+            />
+            <Route
+              path="newAccount"
+              element={<NewAccount />}
+            />
+          </Routes>
 
           <ToastContainer
             autoClose={5000}
