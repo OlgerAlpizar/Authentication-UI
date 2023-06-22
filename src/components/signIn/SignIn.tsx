@@ -72,7 +72,7 @@ const SignIn: FC = () => {
           className="float-end m-0 p-0"
         >
           <Link
-            to={'../sign-up'}
+            to={'sign-up'}
             className={'primaryIconBtn'}
           >
             &nbsp;Not a member yet!
@@ -180,7 +180,7 @@ const SignIn: FC = () => {
 
           <Form.Group
             as={Row}
-            className={cx('mb-3')}
+            className={cx('mb-3', 'text-center')}
           >
             <FormSocialManager socialEvent={SocialEvent.SignIn} />
           </Form.Group>
