@@ -14,9 +14,15 @@ dependencies:
   classnames:
     specifier: ^2.3.2
     version: 2.3.2
+  pubsub-js:
+    specifier: ^1.9.4
+    version: 1.9.4
   react:
     specifier: ^18.2.0
     version: 18.2.0
+  react-auth-kit:
+    specifier: ^2.12.3
+    version: 2.12.3(js-cookie@3.0.5)(jwt-decode@3.1.2)(react-dom@18.2.0)(react-router-dom@6.12.0)(react@18.2.0)
   react-bootstrap:
     specifier: ^2.7.4
     version: 2.7.4(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0)
@@ -43,6 +49,9 @@ devDependencies:
   '@types/node':
     specifier: ^20.2.5
     version: 20.2.5
+  '@types/pubsub-js':
+    specifier: ^1.8.3
+    version: 1.8.3
   '@types/react':
     specifier: ^18.2.8
     version: 18.2.8
@@ -1078,6 +1087,13 @@ packages:
       {
         integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==,
       }
+
+  /@types/pubsub-js@1.8.3:
+    resolution:
+      {
+        integrity: sha512-6BqY04dh2UV1dNV690tyJVJYQ0U6qBH4tU+FCwY1Mhl8jOPOP9qiIvgLnB59cVik/E6/R002oXZpGiDm+2C8eA==,
+      }
+    dev: true
 
   /@types/qs@6.9.7:
     resolution:
@@ -4152,6 +4168,14 @@ packages:
       supports-color: 8.1.1
     dev: true
 
+  /js-cookie@3.0.5:
+    resolution:
+      {
+        integrity: sha512-cEiJEAEoIbWfCZYKWhVwFuvPX1gETRYPw6LlaTKoxD3s2AkXzkCjnp6h0V77ozyqj0jakteJ4YqDJT830+lVGw==,
+      }
+    engines: { node: '>=14' }
+    dev: false
+
   /js-tokens@4.0.0:
     resolution:
       {
@@ -4224,6 +4248,13 @@ packages:
       array-includes: 3.1.6
       object.assign: 4.1.4
     dev: true
+
+  /jwt-decode@3.1.2:
+    resolution:
+      {
+        integrity: sha512-UfpWE/VZn0iP50d8cz9NrZLM9lSWhcJ+0Gt/nm4by88UL+J1SiKN8/5dkjMmbEzwL2CAe+67GsegCbIKtbp75A==,
+      }
+    dev: false
 
   /kind-of@6.0.3:
     resolution:
@@ -5103,6 +5134,13 @@ packages:
       }
     dev: false
 
+  /pubsub-js@1.9.4:
+    resolution:
+      {
+        integrity: sha512-hJYpaDvPH4w8ZX/0Fdf9ma1AwRgU353GfbaVfPjfJQf1KxZ2iHaHl3fAUw1qlJIR5dr4F3RzjGaWohYUEyoh7A==,
+      }
+    dev: false
+
   /punycode@2.3.0:
     resolution:
       {
@@ -5157,6 +5195,26 @@ packages:
       iconv-lite: 0.4.24
       unpipe: 1.0.0
     dev: true
+
+  /react-auth-kit@2.12.3(js-cookie@3.0.5)(jwt-decode@3.1.2)(react-dom@18.2.0)(react-router-dom@6.12.0)(react@18.2.0):
+    resolution:
+      {
+        integrity: sha512-L4Psz0CMWgpUCYjHwix2B1OV/dMcS629J+wrBV5MJIbCnV8RAsnv+EkAOc4Ke62IDKJQGFwDbz0ldNX5Su0eGw==,
+      }
+    engines: { node: '>=8' }
+    peerDependencies:
+      js-cookie: ^3.0.1
+      jwt-decode: ^3.1.2
+      react: '>=16.8.0 || ^17.x || ^18.x'
+      react-dom: '>=16.8.0 || ^17.x || ^18.x'
+      react-router-dom: ^6.2.0
+    dependencies:
+      js-cookie: 3.0.5
+      jwt-decode: 3.1.2
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
+      react-router-dom: 6.12.0(react-dom@18.2.0)(react@18.2.0)
+    dev: false
 
   /react-bootstrap@2.7.4(@types/react@18.2.8)(react-dom@18.2.0)(react@18.2.0):
     resolution:

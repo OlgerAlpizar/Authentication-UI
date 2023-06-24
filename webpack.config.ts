@@ -13,6 +13,8 @@ dotenv.config()
 
 module.exports = {
   mode: Config.env(),
+  devtool: Config.env() === 'production' ? false : 'source-map',
+  target: 'web',
   entry: path.resolve(__dirname, 'src', 'index.tsx'),
   output: {
     path: path.join(__dirname, 'dist'),

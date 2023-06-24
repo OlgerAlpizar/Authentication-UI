@@ -1,20 +1,24 @@
 import { Card, Col, Form, Row } from 'react-bootstrap'
 import { FC, SyntheticEvent, useReducer, useState } from 'react'
 import { InputInfo, InputInfoSet } from '../../models/InputInfo'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { buildApiCatchMessage } from '../../utils/buildApiCatchMessage'
 import { emailValidator, noEmptyValidator } from '../../utils/RegexValidator'
 import { onBasicLogin } from '../../services/AuthenticationService'
 import { textInputReducer } from '../../utils/InputReducer'
 import { toast } from 'react-toastify'
+import { useSignIn } from 'react-auth-kit'
+import AuthenticationInfo from 'src/models/responses/AuthenticationInfo'
 import FormSocialManager from '../socialLinks/SocialLinks'
+import PubSub from 'pubsub-js'
+import PubSubTopic from '../../models/PubSubTopic'
 import SignInRequest from '../../models/requests/SignInRequest'
 import SocialEvent from '../../models/SocialEvent'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
 import cx from 'classnames'
 
 const SignIn: FC = () => {
-  const navigate = useNavigate()
+  const signIn = useSignIn()
 
   const emailReducer = (currentState: InputInfo, action: InputInfoSet) => {
     return textInputReducer(
@@ -49,9 +53,16 @@ const SignIn: FC = () => {
     const request = new SignInRequest(email.value, password.value, rememberMe)
 
     onBasicLogin(request)
-      .then(() => {
+      .then((res: AuthenticationInfo) => {
         toast.success('Sign in completed')
-        navigate('../home')
+        signIn({
+          token: res.token,
+          expiresIn: 3600, // TODO: fix this
+          tokenType: res.type,
+          authState: { email: email.value },
+        })
+
+        PubSub.publish(PubSubTopic[PubSubTopic.SIGN_IN], email)
       })
       .catch((err: Error) => toast.error(buildApiCatchMessage(err)))
       .finally(() => setSubmitting(false))

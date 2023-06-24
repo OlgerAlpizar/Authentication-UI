@@ -3,8 +3,6 @@ import { FC } from 'react'
 import { Route, Routes } from 'react-router-dom'
 import { ToastContainer, toast } from 'react-toastify'
 import ForgotPassword from './components/forgotPassword/ForgotPassword'
-import Home from './components/home/Home'
-import NewAccount from './components/newAccount/NewAccount'
 import SignIn from './components/signIn/SignIn'
 import SignUp from './components/signUp/SignUp'
 const App: FC = () => {
@@ -24,14 +22,6 @@ const App: FC = () => {
             <Route
               path="forgot-password"
               element={<ForgotPassword />}
-            />
-            <Route
-              path="home"
-              element={<Home />}
-            />
-            <Route
-              path="newAccount"
-              element={<NewAccount />}
             />
           </Routes>
 

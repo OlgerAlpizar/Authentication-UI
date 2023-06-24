@@ -22,15 +22,18 @@ import {
 import { onBasicRegister } from '../../services/AuthenticationService'
 import { textInputReducer } from '../../utils/InputReducer'
 import { toast } from 'react-toastify'
-import { useNavigate } from 'react-router-dom'
+import { useSignIn } from 'react-auth-kit'
+import AuthenticationInfo from 'src/models/responses/AuthenticationInfo'
 import CreateAccountRequest from '../../models/requests/CreateAccountRequest'
 import FormSocialManager from '../socialLinks/SocialLinks'
+import PubSub from 'pubsub-js'
+import PubSubTopic from '../../models/PubSubTopic'
 import SocialEvent from '../../models/SocialEvent'
 import SubmitButton from '../shared/SubmitButton/SubmitButton'
 import TermsConditions from '../termsConditions/TermsConditions'
 
 const SignUp: FC = () => {
-  const navigate = useNavigate()
+  const signIn = useSignIn()
 
   const emailReducer = (currentState: InputInfo, action: InputInfoSet) => {
     return textInputReducer(
@@ -110,9 +113,16 @@ const SignUp: FC = () => {
     )
 
     onBasicRegister(request)
-      .then(() => {
+      .then((res: AuthenticationInfo) => {
         toast.success('The account has been created')
-        navigate('../newAccount')
+        signIn({
+          token: res.token,
+          expiresIn: 3600, // TODO: fix this
+          tokenType: res.type,
+          authState: { email: email.value },
+        })
+
+        PubSub.publish(PubSubTopic[PubSubTopic.SIGN_UP], email)
       })
       .catch((err: Error) => toast.error(buildApiCatchMessage(err)))
       .finally(() => setSubmitting(false))
