@@ -62,7 +62,7 @@ const SignIn: FC = () => {
           authState: { email: email.value },
         })
 
-        PubSub.publish(PubSubTopic[PubSubTopic.SIGN_IN], email)
+        PubSub.publish(PubSubTopic[PubSubTopic.SIGN_IN], {email: email.value})
       })
       .catch((err: Error) => toast.error(buildApiCatchMessage(err)))
       .finally(() => setSubmitting(false))
