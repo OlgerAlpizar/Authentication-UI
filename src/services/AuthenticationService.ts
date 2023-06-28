@@ -1,4 +1,3 @@
-import AuthToken from 'src/models/responses/AuthenticationInfo'
 import Config from '../configurations/config'
 import CreateAccount from '../models/requests/CreateAccountRequest'
 import SignInRequest from '../models/requests/SignInRequest'
@@ -19,12 +18,16 @@ export const onRegisterSocialLink = async (
 
 export const onBasicLogin = async (
   request: SignInRequest
-): Promise<AuthToken> => {
+): Promise<string> => {
   return authApi.post('/sign-in', request).then((res) => res.data)
 }
 
 export const onBasicRegister = async (
   request: CreateAccount
-): Promise<AuthToken> => {
+): Promise<string> => {
   return authApi.post('/sign-up', request).then((res) => res.data)
+}
+
+export const onForgotPassword = async (request: string): Promise<unknown> => {
+  return authApi.post('/forgot-password', request).then((res) => res.data)
 }

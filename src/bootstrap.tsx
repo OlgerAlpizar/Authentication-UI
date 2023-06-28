@@ -1,8 +1,9 @@
-import './index.scss'
+import './bootstrap.scss'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'react-toastify/dist/ReactToastify.css'
 import { AuthProvider } from 'react-auth-kit'
 import { BrowserRouter } from 'react-router-dom'
+import { ToastContainer, toast } from 'react-toastify'
 import { createRoot } from 'react-dom/client'
 import App from './App'
 import React from 'react'
@@ -19,6 +20,15 @@ root.render(
     >
       <BrowserRouter>
         <App />
+
+        <ToastContainer
+          autoClose={5000}
+          position={toast.POSITION.BOTTOM_RIGHT}
+          pauseOnFocusLoss={false}
+          newestOnTop={true}
+          limit={5}
+        />
+
       </BrowserRouter>
     </AuthProvider>
   </React.StrictMode>

@@ -1,5 +1,5 @@
 import { FC } from 'react'
-import ModalPop from '../shared/Modal/Modal'
+import ModalPop from '../../shared/components/modal/Modal'
 
 type TermsConditionsProps = {
   show: boolean

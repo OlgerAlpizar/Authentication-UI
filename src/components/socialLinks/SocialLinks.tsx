@@ -6,7 +6,7 @@ import {
   onRegisterSocialLink,
 } from '../../services/AuthenticationService'
 import { toast } from 'react-toastify'
-import ButtonIcon from '../shared/IconButton/IconButton'
+import ButtonIcon from '../../shared/components/iconButton/IconButton'
 import SocialEvent from '../../models/SocialEvent'
 import SocialLink from '../../models/SocialLink'
 

@@ -8,13 +8,12 @@ import { onBasicLogin } from '../../services/AuthenticationService'
 import { textInputReducer } from '../../utils/InputReducer'
 import { toast } from 'react-toastify'
 import { useSignIn } from 'react-auth-kit'
-import AuthenticationInfo from 'src/models/responses/AuthenticationInfo'
 import FormSocialManager from '../socialLinks/SocialLinks'
 import PubSub from 'pubsub-js'
 import PubSubTopic from '../../models/PubSubTopic'
 import SignInRequest from '../../models/requests/SignInRequest'
 import SocialEvent from '../../models/SocialEvent'
-import SubmitButton from '../shared/SubmitButton/SubmitButton'
+import SubmitButton from '../../shared/components/submitButton/SubmitButton'
 import cx from 'classnames'
 
 const SignIn: FC = () => {
@@ -53,13 +52,12 @@ const SignIn: FC = () => {
     const request = new SignInRequest(email.value, password.value, rememberMe)
 
     onBasicLogin(request)
-      .then((res: AuthenticationInfo) => {
+      .then((res: string) => {
         toast.success('Sign in completed')
         signIn({
-          token: res.token,
-          expiresIn: 3600, // TODO: fix this
-          tokenType: res.type,
-          authState: { email: email.value },
+          token: res,
+          expiresIn: 15000, // 15min
+          tokenType: 'Bearer'
         })
 
         PubSub.publish(PubSubTopic[PubSubTopic.SIGN_IN], {email: email.value})

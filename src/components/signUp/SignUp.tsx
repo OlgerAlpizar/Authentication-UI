@@ -23,13 +23,12 @@ import { onBasicRegister } from '../../services/AuthenticationService'
 import { textInputReducer } from '../../utils/InputReducer'
 import { toast } from 'react-toastify'
 import { useSignIn } from 'react-auth-kit'
-import AuthenticationInfo from 'src/models/responses/AuthenticationInfo'
 import CreateAccountRequest from '../../models/requests/CreateAccountRequest'
 import FormSocialManager from '../socialLinks/SocialLinks'
 import PubSub from 'pubsub-js'
 import PubSubTopic from '../../models/PubSubTopic'
 import SocialEvent from '../../models/SocialEvent'
-import SubmitButton from '../shared/SubmitButton/SubmitButton'
+import SubmitButton from '../../shared/components/submitButton/SubmitButton'
 import TermsConditions from '../termsConditions/TermsConditions'
 
 const SignUp: FC = () => {
@@ -113,12 +112,12 @@ const SignUp: FC = () => {
     )
 
     onBasicRegister(request)
-      .then((res: AuthenticationInfo) => {
+      .then((res: string) => {
         toast.success('The account has been created')
         signIn({
-          token: res.token,
+          token: res,
           expiresIn: 3600, // TODO: fix this
-          tokenType: res.type,
+          tokenType: 'Bearer',
           authState: { email: email.value },
         })
 
